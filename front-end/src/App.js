@@ -18,10 +18,10 @@ class App extends Component {
             <Route exact path={Routes.home}>
               <Pages.LandingPage/>
             </Route>
-            {/* <Route path={Routes.pemesanan1}>
-              <Pages.LandingPage/>
+             <Route path={Routes.menu}>
+              <Pages.Menu/>
             </Route> 
-            <Route path={Routes.pemesanan2}>
+            {/*<Route path={Routes.pemesanan2}>
               <Pages.LandingPage/>
             </Route>  */}
             <Route path={Routes.pembayaran}>

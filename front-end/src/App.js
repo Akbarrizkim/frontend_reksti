@@ -23,6 +23,9 @@ class App extends Component {
             </Route>  */}
             <Route path={Routes.pembayaran}>
               <Pages.Pembayaran/>
+            </Route>
+            <Route path={Routes.orderhistory}>
+              <Pages.OrderHistory/>
             </Route>  
             <Route path={Routes.menu}>
               <Pages.Menu/>

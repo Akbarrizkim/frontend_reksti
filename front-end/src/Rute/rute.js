@@ -5,5 +5,6 @@ Routes.home = "/"
 Routes.pemesanan1 = Routes.home + "menu"
 Routes.pemesanan2 = Routes.home + "pemesanan/kedua/"
 Routes.pembayaran = Routes.home + "pembayaran"
+Routes.orderhistory = Routes.home + "orderhistory"
 
 export default Routes;

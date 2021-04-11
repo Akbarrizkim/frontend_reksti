@@ -17,9 +17,6 @@ class App extends Component {
           <Switch>
             <Route exact path={Routes.home}>
               <Pages.LandingPage/>
-            </Route>
-             <Route path={Routes.menu}>
-              <Pages.Menu/>
             </Route> 
             {/*<Route path={Routes.pemesanan2}>
               <Pages.LandingPage/>
@@ -27,6 +24,9 @@ class App extends Component {
             <Route path={Routes.pembayaran}>
               <Pages.Pembayaran/>
             </Route>  
+            <Route path={Routes.menu}>
+              <Pages.Menu/>
+            </Route>
           </Switch>
         </Router>
       </React.Fragment>

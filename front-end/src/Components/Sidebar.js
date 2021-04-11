@@ -7,7 +7,7 @@ const Sidebar = () => {
     
     return(
         <div style = {sidebarStyle}>
-            <h1>side</h1>
+            <h2 style = {headerStyle}>Filter</h2>
             {NavItems.map((navItem, index) => {
                 return(
                     <SideItem key = {index} items = {navItem}/>
@@ -25,6 +25,12 @@ const sidebarStyle = {
     position: "absolute",
     left: 0,
     textAlign: "left"
+}
+
+const headerStyle = {
+    fontWeight: "600",
+    padding: "0px 20px",
+    color: "#000"
 }
 
 export default Sidebar;

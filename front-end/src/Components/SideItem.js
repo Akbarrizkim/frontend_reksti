@@ -11,19 +11,32 @@ const SideItem = ({items}) => {
 
     return(
         <div onClick = {() => openSideNav()}>
-            <p>Side Items</p>
+            <p style = {headerStyle}>{name}</p>
             {isOpen && links.map((link,index) => {
                 const {title, to} = link;
                 return (
                     <div>
                         <a href = {to}>
-                            <p>{title}</p>
+                            <p style = {contentStyle}>{title}</p>
                         </a>
                     </div>
                 );
             })}
         </div>
     );
+}
+
+
+const headerStyle = {
+    fontWeight: "600",
+    padding: "0px 20px",
+    color: "#000"
+}
+
+const contentStyle = {
+    fontWeight: "600",
+    padding: "0px 20px",
+    color: "#564438"
 }
 
 export default SideItem;

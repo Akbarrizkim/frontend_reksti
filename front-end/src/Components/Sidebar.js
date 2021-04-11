@@ -19,7 +19,7 @@ const Sidebar = () => {
 
 
 const sidebarStyle = {
-    height: "100vh",
+    height: "150vh",
     width: "270px",
     background: "#C4C4C4",
     position: "absolute",

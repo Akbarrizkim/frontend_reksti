@@ -2,6 +2,7 @@ import {LandingPage} from "./LandingPage";
 import {Pembayaran} from "./Pembayaran";
 import {OrderHistory} from "./OrderHistory";
 import {Menu} from "./Menu";
+import {Account} from "./Account";
 
 // import TambahAnggota from "./tambahAnggota";
 // import UbahData from "./ubahData";
@@ -11,7 +12,8 @@ const Pages = {
   LandingPage,
   Pembayaran,
   OrderHistory,
-  Menu
+  Menu,
+  Account
 }
 
 export default Pages;   

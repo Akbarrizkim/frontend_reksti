@@ -26,10 +26,13 @@ class App extends Component {
             </Route>
             <Route path={Routes.orderhistory}>
               <Pages.OrderHistory/>
+            </Route>
+            <Route path={Routes.account}>
+              <Pages.Account/>
             </Route>  
             <Route path={Routes.menu}>
               <Pages.Menu/>
-            </Route>
+            </Route>  
           </Switch>
         </Router>
       </React.Fragment>

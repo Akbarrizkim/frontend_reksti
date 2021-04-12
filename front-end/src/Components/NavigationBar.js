@@ -54,7 +54,7 @@ export const NavigationBar = () => (
           </StyledNavItem>
           <StyledNavItem>
             <Nav.Link>
-              <Link to="/about">About</Link>
+              <Link to="/account">Account</Link>
             </Nav.Link>
           </StyledNavItem>
           <StyledNavItem>

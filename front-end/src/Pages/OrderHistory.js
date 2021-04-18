@@ -19,6 +19,8 @@ export const OrderHistory = () => (
             
             <HistoryCard />
             <HistoryCard />
+            <HistoryCard />
+            <HistoryCard />
         </div>
     </Styles>
 )

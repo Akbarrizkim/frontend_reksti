@@ -5,7 +5,6 @@ import styled from 'styled-components';
 const Styles = styled.div`
     .card {
         margin-top: 10px;
-        margin-left: 200px:
     }
 `;
 

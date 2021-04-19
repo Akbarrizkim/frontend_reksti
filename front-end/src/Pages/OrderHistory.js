@@ -3,6 +3,7 @@ import HistoryCard from '../Components/HistoryCard';
 import styled from 'styled-components';
 import axios from 'axios';
 
+let idCustomer = 1;
 const Styles = styled.div`
     .wrapper {
         margin-top: 10px;
@@ -16,7 +17,7 @@ export const OrderHistory = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios('http://139.59.235.181:8800/order',);
+            const result = await axios(`http://139.59.235.181:8800/order/customer/${idCustomer}/history`,);
 
             setState(result.data);
             console.log(result.data);

@@ -57,11 +57,11 @@ export const NavigationBar = () => (
               <Link to="/account">Account</Link>
             </Nav.Link>
           </StyledNavItem>
-          <StyledNavItem>
+          {/* <StyledNavItem>
             <Nav.Link>
               <Link to="/contact">Contact</Link>
             </Nav.Link>
-          </StyledNavItem>
+          </StyledNavItem> */}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

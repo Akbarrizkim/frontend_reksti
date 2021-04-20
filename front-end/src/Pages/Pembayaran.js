@@ -71,6 +71,7 @@ const Isi = styled.p`
 
 let id = 11;
 
+
 export const Pembayaran = () =>{
     const [state, setState] = useState([]);
 

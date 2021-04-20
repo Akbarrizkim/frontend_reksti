@@ -5,6 +5,10 @@ import ovoImage from '../Assets/Ovo.png';
 import gopayImage from '../Assets/gopay.png';
 import linkajaImage from '../Assets/linkaja.png';
 import axios from 'axios';
+import ListGroup from 'react-bootstrap/ListGroup'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+
 
 const StyledTable = styled(Table)`
     margin-top: 30px;
@@ -31,13 +35,19 @@ const Styledjudul2 = styled.h2`
     margin-left: 90px;
 `;
 
-const Styledgroupcard = styled(CardGroup)`
+const StyledListGroup = styled(ListGroup)`
     margin-top: 40px;
     margin-left: 70px;
 `;
 
-const Styledpembayaran3 = styled(Card.Title)`
-    text-align: center;
+const StyledButton = styled(Button)`
+    margin-top: 40px;
+    left: 50%;
+    position: absolute;
+`;
+
+const StyledButton1 = styled(Button)`
+    float: right;
 `;
 
 const Styledpembayaran2 = styled(Card.Title)`
@@ -59,7 +69,7 @@ const Isi = styled.p`
     margin-left: 20px;
 `;
 
-let idCustomer = 1;
+let id = 11;
 
 export const Pembayaran = () =>{
     const [state, setState] = useState([]);
@@ -68,17 +78,41 @@ export const Pembayaran = () =>{
         const fetchData = async () => {
             const result = await axios(`http://139.59.235.181:8800/payment`,);
 
-            setState(result.data);
+            setState(result.data);  
             console.log(result.data);
         };
         fetchData();
     }, []);
 
+    // const [paymentHistory, setPaymentHistory] = useState([]);
+
+    // useEffect(() => {
+    //     fetch("http://139.59.235.181:8800/payment"+id)
+    //     .then(res => res.json())
+    //     .then(
+    //         (result) => {
+    //             setPaymentHistory(result);
+    //         }
+    //     );        
+    // });
+
+    const [paymentType, setPaymentType] = useState(false);
+
+    // function submitNewPayment() {
+    //     let data = {
+    //       order_id: order_id,
+    //       amount: amount,
+    //       payment_type_id: paymentType
+    // };
+    
+    //     axios.post('http://139.59.235.181:8800/payment',data);
+    // }
+
     return (
         <div class="parent-container d-flex">
-            <div class="container">
+            <div class="container">         
                 <div class="row">
-                    <div class="col">
+                    <div class="col-sm-9">
                             <Styledjudul>
                                 Riwayat Pembayaran Berhasil
                             </Styledjudul>
@@ -125,12 +159,40 @@ export const Pembayaran = () =>{
                     <Styledjudul2>
                         Pilih metode pembayaran
                     </Styledjudul2>
-                    <Styledgroupcard>
+                    <StyledListGroup>
+                        <ListGroup.Item action>
+                            Ovo
+                            <StyledButton1 margin= "right" value={"OVO"} onClick={(e) => { setPaymentType(e.target.value)}} >
+                                Pilih
+                            </StyledButton1>
+                        </ListGroup.Item>
+                        <ListGroup.Item action>
+                            Gopay
+                            <StyledButton1 margin= "right" value={"GoPay"} onClick={(e) => { setPaymentType(e.target.value)}} >
+                                Pilih
+                            </StyledButton1>
+                        </ListGroup.Item>
+                        <ListGroup.Item action>
+                            LinkAja
+                            <StyledButton1 margin= "right" value={"LinkAja"} onClick={(e) => { setPaymentType(e.target.value)}} >
+                                Pilih
+                            </StyledButton1>
+                        </ListGroup.Item>
+                    </StyledListGroup>
+                    <StyledButton variant="primary" size="lg" active>
+                        Bayar!
+                    </StyledButton>     
+                    <h1>
+                        {paymentType}
+                    </h1>     
+
+                    {/* <Styledgroupcard>
                         <Card>
                             <Card.Img variant="bottom" src={ovoImage} />
                             <Card.Body>
                                 <Styledpembayaran1>Ovo</Styledpembayaran1>
                             </Card.Body>
+                            <Button variant="primary">Go somewhere</Button>
                         </Card>
                         <Card>
                             <Card.Img variant="bottom" src={gopayImage} />
@@ -144,13 +206,7 @@ export const Pembayaran = () =>{
                                 <Styledpembayaran3>LinkAja</Styledpembayaran3>
                             </Card.Body>
                         </Card>
-                    </Styledgroupcard>
-                    <Petunjuk>
-                        Petunjuk Pembayaran:
-                    </Petunjuk>
-                    <Isi>
-                        1. saya saya
-                    </Isi>
+                    </Styledgroupcard> */}
                     </div>
                 </div>
             </div>

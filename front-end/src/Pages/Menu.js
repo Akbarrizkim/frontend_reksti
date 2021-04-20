@@ -17,7 +17,7 @@ const Styles = styled.div`
 export const Menu = () => {
 
     const [state, setState] = useState([]);
-
+    
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(`http://139.59.235.181:8800/menu`,);

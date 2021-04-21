@@ -1,52 +1,137 @@
-import React from 'react';
+import React, {Component} from 'react';
 import esKrim from '../Assets/eskrim.jpg'
 import esKepal from '../Assets/eskepal.jpg'
 import basoAci from '../Assets/basoaci.jpeg'
 import styled from 'styled-components';
+import { Card } from 'react-bootstrap';
+import Cookie from 'universal-cookie';
+import LandingPage from '../Pages/LandingPage'
 
 
-const listProducts = [
-    {id: 1, name: 'Es Krim', description: 'Es krim rasa cokelat', price: 'Rp 5000', thumb: esKrim},
-    {id: 2, name: 'Es Kepal Milo', description: 'Es kepal dengan milo dan topping', price: 'Rp 15000', thumb: esKepal},
-    {id: 3, name: 'Baso Aci', description: 'Baso aci 100% micin', price: 'Rp 8000', thumb: basoAci}
-]
-
-const cardStyle = {
-    height: "50vh",
+const CardStyle = styled.div`
+    .card {
+    height: "45vh",
     width: "1000px",
     background: "#C4C4C4",
     position: "relative",
     left: 300,
     textAlign: "left",
     flex: 1,
-    flexDirection: "row"
-}
+    flexDirection: "row",
+    padding: '8px'
+}`;
+
+const cardStyle =
+    {
+    height: "45vh",
+    width: "600px",
+    background: "#C4C4C4",
+    position: "relative",
+    left: 300,
+    textAlign: "left",
+    flex: 1,
+    flexDirection: "row",
+    padding: '8px'
+};
 
 const imageStyle = {
     textAlign: "left",
     flex:1,
+    padding: '10px',
+    height: '270px',
+    width: '270px'
 }
 
-const Products = () => {
-
-    console.log(listProducts);
-    const listItem = listProducts.map((item) => 
-    <div className = "card" key = {item.id} style = {cardStyle}>
-        <div className = "card_image" >
-            <img src= {item.thumb}/>
-        </div>
-    <div className = "cardHeader" style = {imageStyle}>
-        <h2>{item.name}</h2>
-        <p>{item.description}</p>
-        <p className = "cardPrice"> {item.price}</p>
-    </div>
-    </div>);
-    return(
-        <div className = "main_content">
-            {listItem}
-        </div>
-    )
-
+const textStyle = {
+    fontWeight: 'bold',
+    color: '#1b35cc'
 }
 
-export default Products;
+const deleteStyle = {
+    color: 'red',
+    fontWeight: 'bold'
+}
+
+function initializeCookie(){
+    var cookie = new Cookie();
+    console.log(`nominal`, cookie.get("nominal"));
+    console.log(`customerID`, cookie.get("customerID"));
+}
+
+function addNominal(add){
+    var cookie = new Cookie();
+    add = console.log(`nominal`, cookie.get("nominal") + add);
+}
+
+function deleteNominal(add){
+    var cookie = new Cookie();
+    add = console.log(`nominal`, cookie.get("nominal")) - add;
+}
+
+export default class Products extends Component {
+
+    componentDidMount(){
+        initializeCookie(1);
+    }
+    render() {
+        return (
+            <CardStyle>
+                <Card>
+                    <Card.Header>Nama Menu: {this.props.menuName}</Card.Header>
+                    <Card.Body>
+                        <Card.Title>Harga: {this.props.menuPrice}</Card.Title>
+                        <Card.Text>
+                            Komposisi: {this.props.menuIngredients}
+                        </Card.Text>
+                    </Card.Body>
+                    <CardStyle>
+                        <Card.Body>
+                            <Card.Text onClick={addNominal(this.props.menuPrice)} style = {textStyle}>Add to Cart</Card.Text>
+                            <Card.Text onClick = {deleteNominal(this.props.menuPrice)} style = {deleteStyle}>Delete from Cart</Card.Text>
+                        </Card.Body>
+                    </CardStyle>
+                </Card>
+                
+            </CardStyle>   
+            
+        )
+    }
+}
+
+
+
+//const Products = () => {
+//
+//    console.log(listProducts);
+//    const listItem = listProducts.map((item) => 
+//    <div className = "card" key = {item.id} style = {cardStyle}>
+//        <div className = "card_image" >
+//            <img src= {item.thumb} style = {imageStyle}/>
+//        </div>
+//    <div className = "cardHeader" style = {imageStyle}>
+//        <h2>{item.name}</h2>
+//        <p>{item.description}</p>
+//        <p className = "cardPrice"> {item.price}</p>
+//        <p style = {textStyle}> Add to Cart</p>
+//        <p style = {deleteStyle}> Delete from Cart</p>
+//    </div>
+//    </div>);
+//
+//    return(
+//        <div className = "main_content">
+//            <div classname = "card" style = {card2Style}>
+//            <h2>Total Harga</h2>
+//            <p>Rp 50000</p>
+//            <p style = {checkoutStyle}>Checkout</p>
+//            </div>
+//            {listItem}
+//            
+//        </div>
+//        
+//    
+//    )
+//
+//}
+///
+//
+//export default Products;

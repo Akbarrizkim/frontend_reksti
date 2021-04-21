@@ -31,10 +31,12 @@ const checkoutStyle = {
 ///}
 ///var setNominal = "50.000"
 
-function initializeCookie(){
+function initializeCookie(inputOrderID){
     var cookie = new Cookie();
     console.log(`nominal`, cookie.get("nominal"));
     console.log(`customerID`, cookie.get("customerID"));
+    cookie.set("orderid", inputOrderID, { path: '/'});
+    
 }
 
 export const Cart = () => {
@@ -47,8 +49,8 @@ export const Cart = () => {
         fetch("http://139.59.235.181:8800/order")
         .then(res=> res.json())
         .then(
-            (result) => {
-                setCart(result);
+            (res) => {
+                setCart(res);
             }
         );
         });
@@ -77,9 +79,6 @@ export const Cart = () => {
     let cookie = new Cookie();
     console.log(`nominal`, cookie.get("nominal"))
     
-    function calculate(amount,price){
-        return parseInt(amount)*parseInt(price);
-    }
     function refreshPage() {
         window.location.reload(false);
       }
@@ -96,9 +95,11 @@ export const Cart = () => {
                     <p>{cookie.get("nominal")}</p>
                     <button onClick={refreshPage}>Tambah Belanjaan Lagi?</button>
                     
-                    
                     <Link to = {{pathname: "/Pembayaran", state: cookie.get("nominal")}} style = {checkoutStyle}className = "btn btn-primary" 
-                    onClick = {createOrder}>
+                    onClick = {() => {
+                        createOrder();
+                        {initializeCookie(setCart);}
+                            }} >
                         Checkout
                     </Link>
                 </div>

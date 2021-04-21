@@ -77,6 +77,7 @@ export const Pembayaran = () =>{
     let cookie = new Cookie();
     var nom = cookie.get("nominal");
     var ID = cookie.get("customerID");
+    var orderid = cookie.get("orderID")
 
 
     const [state, setState] = useState([]);
@@ -117,7 +118,7 @@ export const Pembayaran = () =>{
 
     function submitPaymentBaru() {
         let dataPayment = {
-            order_id: 1,
+            order_id: orderid,
             amount: nom,
             payment_type_id: paymentType
         };
@@ -196,7 +197,7 @@ export const Pembayaran = () =>{
                             </StyledButton1>
                         </ListGroup.Item>
                     </StyledListGroup>
-                    <StyledButton variant="primary" size="lg" active>
+                    <StyledButton variant="primary" size="lg" active onClick={(e) => { submitPaymentBaru() }}>
                         Bayar!
                     </StyledButton>     
                     <h1>

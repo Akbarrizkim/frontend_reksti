@@ -97,8 +97,8 @@ export const Cart = () => {
                     <button onClick={refreshPage}>Tambah Belanjaan Lagi?</button>
                     
                     
-                    <Link to = {{pathname: "/Pembayaran", state: cookie.get("nominal")}} style = {checkoutStyle}className = "btn btn-primary" >
-                        {createOrder()}
+                    <Link to = {{pathname: "/Pembayaran", state: cookie.get("nominal")}} style = {checkoutStyle}className = "btn btn-primary" 
+                    onClick = {createOrder}>
                         Checkout
                     </Link>
                 </div>

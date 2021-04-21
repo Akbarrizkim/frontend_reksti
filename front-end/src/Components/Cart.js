@@ -38,7 +38,9 @@ function initializeCookie(){
 }
 
 export const Cart = () => {
+    
     const [cartState, setCart] = useState([]);
+    const [state, setState] = useState([]);
 
     
     useEffect(() => {
@@ -50,6 +52,15 @@ export const Cart = () => {
             }
         );
         });
+        useEffect(() => {
+            const fetchData = async () => {
+                const result = await axios(`http://139.59.235.181:8800/menu`,);
+    
+                setState(result.data);  
+                console.log(result.data);
+            };
+            fetchData();
+        }, []);
 
     function createOrder() {
         var cookie = new Cookie();
@@ -62,14 +73,30 @@ export const Cart = () => {
         };
         axios.post('http://139.59.235.181:8800/order',data)
     }
+    
     let cookie = new Cookie();
+    console.log(`nominal`, cookie.get("nominal"))
+    
+    function calculate(amount,price){
+        return parseInt(amount)*parseInt(price);
+    }
+    function refreshPage() {
+        window.location.reload(false);
+      }
+
+    let stateValue = '';
+    const value = '';
     
     return (
         
+        
+
         <div classname = "card" style = {card2Style}>
-                    <h2>Total Harga: </h2>
-                    {console.log(`nominal`, cookie.get("nominal"))}
+                    <h2>Keranjang: </h2>
                     <p>{cookie.get("nominal")}</p>
+                    <button onClick={refreshPage}>Tambah Belanjaan Lagi?</button>
+                    
+                    
                     <Link to = {{pathname: "/Pembayaran", state: cookie.get("nominal")}} style = {checkoutStyle}className = "btn btn-primary" >
                         {createOrder()}
                         Checkout
@@ -90,6 +117,14 @@ export const Cart = () => {
 ///                </div>
 ///    )
 ///}
+///<Card>
+///                        {state.data?.map(item =>(
+///                            <Card.Text>
+///                                <input type = "int"/>
+///                                {item.menu_name} 
+///                            </Card.Text>
+///                        ))}
+///                    </Card>
 ///
 
 export default Cart;

@@ -61,21 +61,13 @@ function initializeCookie(){
 
 let result = 0;
 function addNominal(add,nom){
-    
     return parseInt(add) + parseInt(nom);
-
 }
 
-function addPrice(price){
-    let cookie = new Cookie();
-    var result = 0;
-    result = cookie.get("nominal") + price;
-    return(cookie.set("nominal",result));
-}
 
 
 function deleteNominal(add,nom){
-    return add - nom;
+    return parseInt(add) - parseInt(nom);
 };
 
 export default class Products extends Component {
@@ -84,11 +76,11 @@ export default class Products extends Component {
         initializeCookie(1);
     }
 
-
+    
     render() {
         let cookie = new Cookie();
-        cookie.set("nominal", 10);
-        let nom = cookie.get("nominal");
+        var nom = cookie.get("nominal");
+        
         return (
             
             <CardStyle>
@@ -100,18 +92,17 @@ export default class Products extends Component {
                             Komposisi: {this.props.menuIngredients}
                         </Card.Text>
                     </Card.Body>
-                    <CardStyle>
-                        <Card.Body>
-                            <button onClick={addNominal(nom,this.props.menuPrice)} style = {textStyle}>
-                                Add to Cart
-                                {cookie.set("nominal", addNominal(nom, this.props.menuPrice))}</button>
-                            <button style = {deleteStyle}>Delete from Cart</button>
-                        </Card.Body>
-                    </CardStyle>
-                    <p>{cookie.get("nominal")}</p>
+                    
                 </Card>
-                
-                
+                <button  onClick=
+                    {(e) => 
+                    {cookie.set("nominal", addNominal(nom,this.props.menuPrice))}
+                    } style = {textStyle}>
+                             Add to Cart
+                        </button>
+                        <button onClick = {(e) => {cookie.set("nominal", deleteNominal(nom, this.props.menuPrice))}} style = {deleteStyle}>
+                            Delete from Cart
+                            </button>
             </CardStyle>   
             
         )
@@ -120,36 +111,13 @@ export default class Products extends Component {
 
 
 
-//const Products = () => {
-//
-//    console.log(listProducts);
-//    const listItem = listProducts.map((item) => 
-//    <div className = "card" key = {item.id} style = {cardStyle}>
-//        <div className = "card_image" >
-//            <img src= {item.thumb} style = {imageStyle}/>
-//        </div>
-//    <div className = "cardHeader" style = {imageStyle}>
-//        <h2>{item.name}</h2>
-//        <p>{item.description}</p>
-//        <p className = "cardPrice"> {item.price}</p>
-//        <p style = {textStyle}> Add to Cart</p>
-//        <p style = {deleteStyle}> Delete from Cart</p>
-//    </div>
-//    </div>);
-//
-//    return(
-//        <div className = "main_content">
-//            <div classname = "card" style = {card2Style}>
-//            <h2>Total Harga</h2>
-//            <p>Rp 50000</p>
-//            <p style = {checkoutStyle}>Checkout</p>
-//            </div>
-//            {listItem}
-//            
-//        </div>
-//        
-//    
-//    )
+///<Card.Body>
+///<button onClick={addNominal(nom,this.props.menuPrice)} style = {textStyle}>
+///    Add to Cart
+///    {cookie.set("nominal", addNominal(nom, this.props.menuPrice))}</button>
+///<button style = {deleteStyle}>Delete from Cart</button>
+///</Card.Body>
+
 //
 //}
 ///

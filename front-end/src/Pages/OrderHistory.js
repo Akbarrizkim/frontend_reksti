@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import HistoryCard from '../Components/HistoryCard';
 import styled from 'styled-components';
 import axios from 'axios';
+import Cookie from 'universal-cookie';
 
-let idCustomer = 1;
 const Styles = styled.div`
     .wrapper {
         margin-top: 10px;
@@ -12,9 +12,12 @@ const Styles = styled.div`
     }
 `;
 
+console.log("orderhistory")
+
 export const OrderHistory = () => {
     const [state, setState] = useState([]);
-
+    let idCustomer = getCookies();
+    
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(`http://139.59.235.181:8800/order/customer/${idCustomer}/history`,);
@@ -25,6 +28,12 @@ export const OrderHistory = () => {
         fetchData();
     }, []);
 
+    function getCookies() {
+        let cookie = new Cookie();
+        console.log('happy', cookie.get('customerID'))
+        return cookie.get('customerID');
+    }
+    
     return (
         <Styles>
             <div className="container">
@@ -36,16 +45,6 @@ export const OrderHistory = () => {
                     <HistoryCard key={item.order_id} idOrder={item.order_id} dateOrder={item.order_date} priceOrder={item.total_price} />
                 ))}
             </div>
-
-            {/* <div>
-                <ul>
-                    {state.data?.map(item => (
-                        <li key={item.order_id}>
-                            <p>{item.order_date}</p>
-                        </li>
-                    ))}
-                </ul>
-            </div> */}
         </Styles>
     );
 }

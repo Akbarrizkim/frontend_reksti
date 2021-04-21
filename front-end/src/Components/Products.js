@@ -60,7 +60,9 @@ function initializeCookie(){
 
 function addNominal(add){
     var cookie = new Cookie();
+
     add = console.log(`nominal`, cookie.get("nominal") + add);
+
 }
 
 function deleteNominal(add){

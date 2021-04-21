@@ -4,7 +4,9 @@ import { Card } from 'react-bootstrap';
 import {Link } from 'react-router-dom';
 import axios from 'axios';
 import Cookie from 'universal-cookie';
-import LandingPage from '../Pages/LandingPage'
+import LandingPage from '../Pages/LandingPage';
+import Products from './Products'
+
 
 
 const card2Style = 
@@ -60,11 +62,13 @@ export const Cart = () => {
         };
         axios.post('http://139.59.235.181:8800/order',data)
     }
-    var cookie = new Cookie();
+    let cookie = new Cookie();
+    
     return (
         
         <div classname = "card" style = {card2Style}>
                     <h2>Total Harga: </h2>
+                    {console.log(`nominal`, cookie.get("nominal"))}
                     <p>{cookie.get("nominal")}</p>
                     <Link to = {{pathname: "/Pembayaran", state: cookie.get("nominal")}} style = {checkoutStyle}className = "btn btn-primary" >
                         {createOrder()}

@@ -2,6 +2,7 @@ import React from 'react';
 import {Button,Image,Form,Row,Col} from 'react-bootstrap';
 import styled from 'styled-components';
 import welcomeImage from '../Assets/welcome.jpg';
+import Cookie from 'universal-cookie';
 
 
 const StyledButton = styled(Button)`
@@ -36,7 +37,15 @@ const StyledFormkolom = styled(Form.Control)`
     width:60%;
 `;
 
-  
+function initializeCookie(inputCustID) {
+    let cookie = new Cookie();
+    cookie.set("customerID", inputCustID, { path: '/' });
+    console.log(`customerID`, cookie.get("customerID"));
+    cookie.set("nominal", 0, { path: '/' });
+    console.log(`nominal`, cookie.get("nominal"));
+    console.log(`customerID`, cookie.get("customerID"));
+}
+
 export const LandingPage = () => (
     <div>
         <StyledImage src={welcomeImage}/>
@@ -45,10 +54,9 @@ export const LandingPage = () => (
                 Masukkan Customer Id
             </StyledFormLabel>
             <StyledFormkolom type="text"/>
-            <StyledButton>
+            <StyledButton onClick={() => initializeCookie(1)}>
                 Submit
             </StyledButton>
         </StyledForm>
     </div>
 )
-

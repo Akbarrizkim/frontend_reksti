@@ -5,7 +5,8 @@ import basoAci from '../Assets/basoaci.jpeg'
 import styled from 'styled-components';
 import { Card } from 'react-bootstrap';
 import Cookie from 'universal-cookie';
-import LandingPage from '../Pages/LandingPage'
+import LandingPage from '../Pages/LandingPage';
+
 
 
 const CardStyle = styled.div`
@@ -58,25 +59,38 @@ function initializeCookie(){
     console.log(`customerID`, cookie.get("customerID"));
 }
 
-function addNominal(add){
-    var cookie = new Cookie();
-
-    add = console.log(`nominal`, cookie.get("nominal") + add);
+let result = 0;
+function addNominal(add,nom){
+    
+    return parseInt(add) + parseInt(nom);
 
 }
 
-function deleteNominal(add){
-    var cookie = new Cookie();
-    add = console.log(`nominal`, cookie.get("nominal")) - add;
+function addPrice(price){
+    let cookie = new Cookie();
+    var result = 0;
+    result = cookie.get("nominal") + price;
+    return(cookie.set("nominal",result));
 }
+
+
+function deleteNominal(add,nom){
+    return add - nom;
+};
 
 export default class Products extends Component {
-
+    
     componentDidMount(){
         initializeCookie(1);
     }
+
+
     render() {
+        let cookie = new Cookie();
+        cookie.set("nominal", 10);
+        let nom = cookie.get("nominal");
         return (
+            
             <CardStyle>
                 <Card>
                     <Card.Header>Nama Menu: {this.props.menuName}</Card.Header>
@@ -88,11 +102,15 @@ export default class Products extends Component {
                     </Card.Body>
                     <CardStyle>
                         <Card.Body>
-                            <Card.Text onClick={addNominal(this.props.menuPrice)} style = {textStyle}>Add to Cart</Card.Text>
-                            <Card.Text onClick = {deleteNominal(this.props.menuPrice)} style = {deleteStyle}>Delete from Cart</Card.Text>
+                            <button onClick={addNominal(nom,this.props.menuPrice)} style = {textStyle}>
+                                Add to Cart
+                                {cookie.set("nominal", addNominal(nom, this.props.menuPrice))}</button>
+                            <button style = {deleteStyle}>Delete from Cart</button>
                         </Card.Body>
                     </CardStyle>
+                    <p>{cookie.get("nominal")}</p>
                 </Card>
+                
                 
             </CardStyle>   
             

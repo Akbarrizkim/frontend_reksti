@@ -4,6 +4,7 @@ import Products from '../Components/Products';
 import Cart from '../Components/Cart';
 import styled from 'styled-components';
 import axios from 'axios';
+import Cookie from 'universal-cookie';
 
 
 const Styles = styled.div`

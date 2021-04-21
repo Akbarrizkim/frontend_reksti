@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { Card } from 'react-bootstrap';
 import {Link } from 'react-router-dom';
 import axios from 'axios';
+import Cookie from 'universal-cookie';
+import LandingPage from '../Pages/LandingPage';
+import Products from './Products'
 
 
 
@@ -22,25 +25,80 @@ const checkoutStyle = {
     color: 'white'
 }
 
+///function setNominalCookie(){
+///    console.log(`customerID`, cookie.get("CustomerID"));
+///    console.log(`nominal`, cookie.get("nominal"));
+///}
+///var setNominal = "50.000"
+
+function initializeCookie(){
+    var cookie = new Cookie();
+    console.log(`nominal`, cookie.get("nominal"));
+    console.log(`customerID`, cookie.get("customerID"));
+}
 
 export const Cart = () => {
+    
     const [cartState, setCart] = useState([]);
+    const [state, setState] = useState([]);
 
     
-    const dummyPrice = "50.000";
     useEffect(() => {
-        const fetchMenu = async () => {
-            const res = await axios.post(`http://139.59.235.181:8800/order`,);
-            this.setMenu({custID : res.data.customer_id, orderPrice : res.data.total_price})
-        };
-        fetchMenu();
-    }, []);
+        fetch("http://139.59.235.181:8800/order")
+        .then(res=> res.json())
+        .then(
+            (result) => {
+                setCart(result);
+            }
+        );
+        });
+        useEffect(() => {
+            const fetchData = async () => {
+                const result = await axios(`http://139.59.235.181:8800/menu`,);
+    
+                setState(result.data);  
+                console.log(result.data);
+            };
+            fetchData();
+        }, []);
 
+    function createOrder() {
+        var cookie = new Cookie();
+        let data = {
+            customer_id : cookie.get("customerID"),
+            total_price : cookie.get("nominal"),
+            order_status : "0",
+            location : "Indonesia"
+
+        };
+        axios.post('http://139.59.235.181:8800/order',data)
+    }
+    
+    let cookie = new Cookie();
+    console.log(`nominal`, cookie.get("nominal"))
+    
+    function calculate(amount,price){
+        return parseInt(amount)*parseInt(price);
+    }
+    function refreshPage() {
+        window.location.reload(false);
+      }
+
+    let stateValue = '';
+    const value = '';
+    
     return (
+        
+        
+
         <div classname = "card" style = {card2Style}>
-                    <h2>Total Harga: </h2>
-                    <p>{dummyPrice}</p>
-                    <Link to = {{pathname: "/Pembayaran", state: dummyPrice}} style = {checkoutStyle}className = "btn btn-primary" >
+                    <h2>Keranjang: </h2>
+                    <p>{cookie.get("nominal")}</p>
+                    <button onClick={refreshPage}>Tambah Belanjaan Lagi?</button>
+                    
+                    
+                    <Link to = {{pathname: "/Pembayaran", state: cookie.get("nominal")}} style = {checkoutStyle}className = "btn btn-primary" >
+                        {createOrder()}
                         Checkout
                     </Link>
                 </div>
@@ -59,6 +117,14 @@ export const Cart = () => {
 ///                </div>
 ///    )
 ///}
+///<Card>
+///                        {state.data?.map(item =>(
+///                            <Card.Text>
+///                                <input type = "int"/>
+///                                {item.menu_name} 
+///                            </Card.Text>
+///                        ))}
+///                    </Card>
 ///
 
 export default Cart;

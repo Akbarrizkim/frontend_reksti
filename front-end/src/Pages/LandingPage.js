@@ -3,6 +3,7 @@ import {Button,Image,Form,Row,Col} from 'react-bootstrap';
 import styled from 'styled-components';
 import welcomeImage from '../Assets/welcome.jpg';
 import Cookie from 'universal-cookie';
+import { Link } from 'react-router-dom';
 
 const StyledButton = styled(Button)`
     margin-left: 770px;
@@ -75,7 +76,6 @@ export const LandingPage = () => {
         console.log(`customerID`, cookie.get("customerID"));
         cookie.set("nominal", 0, { sameSite: 'none' });
         console.log(`nominal`, cookie.get("nominal"));
-        console.log(`customerID`, cookie.get("customerID"));
     }
 
     return(
@@ -86,7 +86,9 @@ export const LandingPage = () => {
                     Masukkan Customer ID
                 </label>
                 <input type='text' value={userID} onChange={handleChange} />
-                <input type='submit' value='Submit' />
+                <Link to = {{ pathname: "/menu" }} className = "btn btn-primary">
+                    Submit
+                </Link>
             </form>
         </div>
     );

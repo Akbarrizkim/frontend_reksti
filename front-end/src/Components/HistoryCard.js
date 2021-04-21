@@ -8,26 +8,7 @@ const Styles = styled.div`
     }
 `;
 
-export default class HistoryCard extends Component {
-    // constructor() {
-    //     super()
-    //     this.state = {
-    //         noPesanan: '1234',
-    //         daftarPesanan: [
-    //             {menu: 'ayam goreng'},
-    //             {menu: 'indomie kuah'},
-    //             {menu: 'es tesh manis'}
-    //         ],
-    //         tagihan: 100000
-    //     }
-    // }
-
-    // renderProduk = () => {
-    //     return this.state.daftarPesanan.map((produk, index) => (
-    //         <li key={index}>{produk.menu}</li>
-    //     ))
-    // }
-    
+export default class HistoryCard extends Component {    
     render() {
         return (
             <Styles>

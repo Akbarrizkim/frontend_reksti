@@ -30,7 +30,6 @@ export const OrderHistory = () => {
 
     function getCookies() {
         let cookie = new Cookie();
-        console.log('happy', cookie.get('customerID'))
         return cookie.get('customerID');
     }
     

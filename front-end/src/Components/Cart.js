@@ -7,8 +7,6 @@ import Cookie from 'universal-cookie';
 import LandingPage from '../Pages/LandingPage';
 import Products from './Products'
 
-
-
 const card2Style = 
     {
     height: "150px",
@@ -53,16 +51,17 @@ export const Cart = () => {
                 setCart(res);
             }
         );
-        });
-        useEffect(() => {
-            const fetchData = async () => {
-                const result = await axios(`http://139.59.235.181:8800/menu`,);
+    }, []);
     
-                setState(result.data);  
-                console.log(result.data);
-            };
-            fetchData();
-        }, []);
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios(`http://139.59.235.181:8800/menu`,);
+
+            setState(result.data);  
+            console.log(result.data);
+        };
+        fetchData();
+    }, []);
 
     function createOrder() {
         var cookie = new Cookie();

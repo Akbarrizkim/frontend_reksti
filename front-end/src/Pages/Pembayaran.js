@@ -8,6 +8,7 @@ import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import Cookie from 'universal-cookie';
 
 
 const StyledTable = styled(Table)`
@@ -69,15 +70,20 @@ const Isi = styled.p`
     margin-left: 20px;
 `;
 
-let id = 11;
+let idx = 1;
 
 
 export const Pembayaran = () =>{
+    let cookie = new Cookie();
+    var nom = cookie.get("nominal");
+    var ID = cookie.get("customerID");
+
+
     const [state, setState] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios(`http://139.59.235.181:8800/payment`,);
+            const result = await axios(`http://139.59.235.181:8800/payment/list/${ID}`,);
 
             setState(result.data);  
             console.log(result.data);
@@ -108,6 +114,16 @@ export const Pembayaran = () =>{
     
     //     axios.post('http://139.59.235.181:8800/payment',data);
     // }
+
+    function submitPaymentBaru() {
+        let dataPayment = {
+            order_id: 1,
+            amount: nom,
+            payment_type_id: paymentType
+        };
+  
+        axios.post('http://139.59.235.181:8800/payment',dataPayment);
+    }
 
     return (
         <div class="parent-container d-flex">
@@ -154,7 +170,7 @@ export const Pembayaran = () =>{
                                 justifyContent: "center",
                                 alignItems: "center",
                                 }}>
-                            <p>Rp.50.000</p>
+                            <p>Rp.{nom}</p>
                         </Modal.Body>
                     </StyledModal>
                     <Styledjudul2>
@@ -186,28 +202,6 @@ export const Pembayaran = () =>{
                     <h1>
                         {paymentType}
                     </h1>     
-
-                    {/* <Styledgroupcard>
-                        <Card>
-                            <Card.Img variant="bottom" src={ovoImage} />
-                            <Card.Body>
-                                <Styledpembayaran1>Ovo</Styledpembayaran1>
-                            </Card.Body>
-                            <Button variant="primary">Go somewhere</Button>
-                        </Card>
-                        <Card>
-                            <Card.Img variant="bottom" src={gopayImage} />
-                            <Card.Body>
-                                <Styledpembayaran2>Gopay</Styledpembayaran2>
-                            </Card.Body>
-                        </Card>
-                        <Card>
-                            <Card.Img variant="bottom" src={linkajaImage} />
-                            <Card.Body>
-                                <Styledpembayaran3>LinkAja</Styledpembayaran3>
-                            </Card.Body>
-                        </Card>
-                    </Styledgroupcard> */}
                     </div>
                 </div>
             </div>

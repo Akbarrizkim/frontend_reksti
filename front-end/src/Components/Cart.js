@@ -105,7 +105,7 @@ export const Cart = () => {
     
     return (
 
-        <div classname = "card" style = {card2Style}>
+        <div className = "card" style = {card2Style}>
                     <h2>Keranjang: </h2>
                     <p>{cookie.get("nominal")}</p>
                     <button onClick={refreshPage}>Tambah Belanjaan Lagi?</button>

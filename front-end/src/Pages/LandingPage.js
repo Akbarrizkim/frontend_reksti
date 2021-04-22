@@ -72,9 +72,10 @@ export const LandingPage = () => {
 
     function initializeCookie(inputCustID) {
         let cookie = new Cookie();
-        cookie.set("customerID", inputCustID, { sameSite: 'none' });
+        cookie.set("customerID", inputCustID, { sameSite: 'none', domain: window.location.hostname });
         console.log(`customerID`, cookie.get("customerID"));
-        cookie.set("nominal", 0, { sameSite: 'none' });
+        console.log('location hostname: ', window.location.hostname);
+        cookie.set("nominal", 0, { sameSite: 'none', domain: window.location.hostname });
         console.log(`nominal`, cookie.get("nominal"));
     }
 

@@ -127,10 +127,10 @@ export const Pembayaran = () =>{
     }
 
     return (
-        <div class="parent-container d-flex">
-            <div class="container">         
-                <div class="row">
-                    <div class="col-sm-9">
+        <div className="parent-container d-flex">
+            <div className="container">         
+                <div className="row">
+                    <div className="col-sm-9">
                             <Styledjudul>
                                 Riwayat Pembayaran Berhasil
                             </Styledjudul>
@@ -155,9 +155,9 @@ export const Pembayaran = () =>{
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-9">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-9">
                     <StyledModal >
                         <Modal.Header style={{
                                 display: "flex",
@@ -206,9 +206,9 @@ export const Pembayaran = () =>{
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
+            <div className="container">
+                <div className="row">
+                    <div className="col">
                     </div>
                 </div>
             </div>

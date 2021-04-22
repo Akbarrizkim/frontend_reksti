@@ -7,8 +7,6 @@ import Cookie from 'universal-cookie';
 import LandingPage from '../Pages/LandingPage';
 import Products from './Products'
 
-
-
 const card2Style = 
     {
     height: "150px",
@@ -25,7 +23,6 @@ const checkoutStyle = {
     color: 'white'
 }
 
-
 ///function setNominalCookie(){
 ///    console.log(`customerID`, cookie.get("CustomerID"));
 ///    console.log(`nominal`, cookie.get("nominal"));
@@ -41,24 +38,39 @@ function initializeCookie(inputOrderID){
 }
 
 export const Cart = () => {
-    var cookie = new Cookie();
+    
     const [cartState, setCart] = useState([]);
     const [state, setState] = useState([]);
-    let total_nominal = getCookies();
-    let nominal = parseInt(cookie.get("nominal"));
+
     
-   /// useEffect(() => {
-   ///     const fetchOrder = async () => {
-   ///         const res = await axios(`http://139.59.235.181:8800/order`,);
-   ///         setCart(res.data);
-   ///         console.log(res.data);
-   ///     };
-   ///     fetchOrder();
-   /// }, []);
+    useEffect(() => {
+<<<<<<< Updated upstream
+        fetch("http://139.59.235.181:8800/order")
+        .then(res=> res.json())
+        .then(
+            (res) => {
+                setCart(res);
+            }
+        );
+    }, []);
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios(`http://139.59.235.181:8800/menu`,);
+
+=======
+        const fetchOrder = async () => {
+            const res = await axios(`http://139.59.235.181:8800/order`,);
+            setCart(res.data);
+            console.log(res.data);
+        };
+        fetchOrder();
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(`http://139.59.235.181:8800/menu`,);
+>>>>>>> Stashed changes
             setState(result.data);  
             console.log(result.data);
         };
@@ -66,34 +78,21 @@ export const Cart = () => {
     }, []);
 
     function createOrder() {
-        
-        
-        let data = JSON.stringify ({
-            customer_id : 1,
-            total_price : nominal,
+        var cookie = new Cookie();
+        let data = {
+            customer_id : cookie.get("customerID"),
+            total_price : cookie.get("nominal"),
             order_status : "0",
             location : "Indonesia"
-        });
-        return data;
-    }
-
-    function getCookies() {
-        let cookie = new Cookie();
-        return cookie.get("nominal");
+        };
     }
 
     useEffect(() => {
-        let orderData = createOrder();
-        const result = axios({
-            method: 'post',
-            url: `http://139.59.235.181:8800/order`,
-            data: orderData,
-            validateStatus: (status) => {return true;}
-        
-        }, [])});
-
+        createOrder();
+        axios.post('http://139.59.235.181:8800/order',data)
+    }, []);
     
-    
+    let cookie = new Cookie();
     console.log(`nominal`, cookie.get("nominal"))
     
     function refreshPage() {
@@ -104,6 +103,8 @@ export const Cart = () => {
     const value = '';
     
     return (
+        
+        
 
         <div classname = "card" style = {card2Style}>
                     <h2>Keranjang: </h2>
@@ -122,5 +123,25 @@ export const Cart = () => {
 
 }
 
+
+///const Cart = () => {
+///    
+///    return(
+///        <div classname = "card" style = {card2Style}>
+///                    <h2>Total Harga: </h2>
+///                    <p>Rp 50.000</p>
+///                    <Link to = "/Pembayaran" style = {checkoutStyle}className = "btn btn-primary">Checkout</Link>
+///                </div>
+///    )
+///}
+///<Card>
+///                        {state.data?.map(item =>(
+///                            <Card.Text>
+///                                <input type = "int"/>
+///                                {item.menu_name} 
+///                            </Card.Text>
+///                        ))}
+///                    </Card>
+///
 
 export default Cart;

@@ -32,7 +32,7 @@ export const Menu = () => {
     return (
         
         <Styles>
-            <div><Sidebar/></div>
+            
             <div><Cart/></div>
             <div className="container">
                 
